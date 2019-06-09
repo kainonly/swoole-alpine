@@ -52,3 +52,5 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && pecl install redis mongodb msgpack swoole \
     && docker-php-ext-enable redis mongodb msgpack swoole \
     && apk del .build-deps
+
+WORKDIR /app
