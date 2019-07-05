@@ -1,4 +1,4 @@
-FROM php:alpine
+FROM php:7.3.6-alpine
 
 RUN apk add --no-cache \
     freetype \
