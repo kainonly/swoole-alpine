@@ -20,7 +20,7 @@ services:
   swoole:
     image: kainonly/swoole-alpine
     restart: always
-    command: 'php /app/think swoole'
+    command: '<swoole command>'
     volumes:
       - ./:/app
     ports:
