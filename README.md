@@ -31,23 +31,11 @@ services:
 
 Extensions:
 
-- calendar
-- bz2
-- zip
-- soap
-- sockets
 - iconv
-- exif
 - gmp
 - bcmath
-- enchant
-- xmlrpc
-- xsl
 - mysqli
 - pdo_mysql
 - opcache
-- gd
 - redis
-- mongodb
-- msgpack
 - swoole
