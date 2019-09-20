@@ -1,34 +1,21 @@
-FROM php:7.3.9-alpine
+FROM alpine:edge
 
 RUN apk add --no-cache \
-    gmp \
-    bzip2 \
-    libzip \
-    enchant
-
-RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
-    \
-    gmp-dev \
-    bzip2-dev \
-    libzip-dev \
-    enchant-dev \
-    \
-    && docker-php-ext-install \
-    \
-    bz2 \
-    zip \
-    sockets \
-    iconv \
-    exif \
-    gmp \
-    bcmath \
-    enchant \
-    mysqli \
-    pdo_mysql \
-    opcache \
-    \
-    && pecl install redis swoole \
-    && docker-php-ext-enable redis swoole \
-    && apk del .build-deps
+    php7 \
+    php7-common \
+    php7-mbstring \
+    php7-iconv \
+    php7-curl \
+    php7-bz2 \
+    php7-json \
+    php7-ctype \
+    php7-mysqli \
+    php7-mysqlnd \
+    php7-openssl \
+    php7-opcache \
+    php7-pdo \
+    php7-pdo_mysql \
+    php7-pecl-swoole --repository https://mirrors.aliyun.com/alpine/edge/testing/
 
 WORKDIR /app
+CMD ["php", "-a"]
