@@ -24,18 +24,5 @@ services:
     volumes:
       - ./:/app
     ports:
-      - 80:80
+      - 5200:5200
 ```
-
-- `80` swoole listen port
-
-Extensions:
-
-- iconv
-- gmp
-- bcmath
-- mysqli
-- pdo_mysql
-- opcache
-- redis
-- swoole
