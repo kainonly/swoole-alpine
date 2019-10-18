@@ -20,9 +20,11 @@ services:
   swoole:
     image: kainonly/swoole-alpine
     restart: always
-    command: '<swoole command>'
+    command: '<exec command>'
     volumes:
       - ./:/app
     ports:
-      - 5200:5200
+      - 9501:9501
 ```
+
+> Include `fswatch`
