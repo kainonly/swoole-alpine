@@ -2,8 +2,6 @@ FROM php:7.3.10-alpine
 
 WORKDIR /app
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-
 RUN apk add --no-cache \
     gettext \
     libstdc++ \
