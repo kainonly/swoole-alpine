@@ -26,5 +26,3 @@ services:
     ports:
       - 9501:9501
 ```
-
-> Include `fswatch`
