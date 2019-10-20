@@ -3,24 +3,11 @@ FROM php:7.3.10-alpine
 WORKDIR /app
 
 RUN apk add --no-cache \
-    gettext \
     libstdc++ \
     libbz2 \
     bzip2 \
     libzip \
     openssl
-
-RUN apk add --no-cache --virtual .build-deps \
-    file git autoconf automake libtool gettext-dev g++ make texinfo curl \
-    && cd /root \
-    && git clone https://github.com/emcrisostomo/fswatch.git \
-    && cd fswatch \
-    && ./autogen.sh \
-    && ./configure \
-    && make -j \
-    && make install \
-    && rm -rf /root/fswatch \
-    && apk del .build-deps
 
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     \
