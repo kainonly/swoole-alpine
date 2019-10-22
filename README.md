@@ -12,7 +12,7 @@ The PHP Swoole service Docker Image containing PHP Common Extensions
 docker pull kainonly/swoole-alpine
 ```
 
-Set docker-compose
+For example, docker-compose of hyperf
 
 ```yaml
 version: '3.7'
@@ -20,9 +20,23 @@ services:
   swoole:
     image: kainonly/swoole-alpine
     restart: always
-    command: '<exec command>'
+    command: 'php bin/hyperf.php start'
     volumes:
       - ./:/app
     ports:
       - 9501:9501
+```
+
+Set nodemon to do a hot restart
+
+```json
+{
+  "verbose": true,
+  "watch": [
+    "app",
+    "config",
+  ],
+  "exec": "docker-compose restart swoole",
+  "ext": "php"
+}
 ```
