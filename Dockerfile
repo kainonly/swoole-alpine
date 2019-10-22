@@ -3,7 +3,6 @@ FROM php:7.3.10-alpine
 WORKDIR /app
 
 RUN apk add --no-cache \
-    bash \
     libstdc++ \
     libbz2 \
     bzip2 \
