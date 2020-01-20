@@ -47,8 +47,8 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \ 
     && docker-php-ext-install -j$(nproc) gd \
     \
-    && pecl install redis swoole msgpack \
-    && docker-php-ext-enable redis swoole msgpack \
+    && pecl install redis swoole \
+    && docker-php-ext-enable redis swoole \
     && apk del .build-deps
 
 RUN echo "swoole.use_shortname='Off'" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini
