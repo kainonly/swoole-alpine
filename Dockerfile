@@ -1,4 +1,4 @@
-FROM php:7.4.2-alpine
+FROM php:7.4.3-alpine
 
 WORKDIR /app
 
@@ -13,10 +13,18 @@ RUN apk add --no-cache \
     libxml2 \
     gmp \
     enchant \
+    zlib \
     openssl
 
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     \
+    linux-headers \
+    make \
+    automake \
+    autoconf \
+    gcc \
+    g++ \
+    zlib-dev \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
@@ -47,8 +55,8 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \ 
     && docker-php-ext-install -j$(nproc) gd \
     \
-    && pecl install redis swoole \
-    && docker-php-ext-enable redis swoole \
+    && pecl install redis swoole grpc protobuf \
+    && docker-php-ext-enable redis swoole grpc protobuf \
     && apk del .build-deps
 
 RUN echo "swoole.use_shortname='Off'" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini
