@@ -70,10 +70,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && cd && rm -rf /build \
     && apk del .build-deps
 
-RUN tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini <<- 'EOF' \
-    extension=swoole \
-    swoole.use_shortname='Off' \
-    EOF
+RUN echo -e "extension=swoole\nswoole.use_shortname='Off'" > /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini
 
 VOLUME [ "/app" ]
 
