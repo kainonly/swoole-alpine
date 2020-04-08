@@ -20,6 +20,7 @@ RUN apk add --no-cache \
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     \
     linux-headers \
+    git \
     make \
     automake \
     autoconf \
@@ -57,11 +58,22 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \ 
     && docker-php-ext-install -j$(nproc) gd \
     \
-    && pecl install redis swoole grpc protobuf yaml \
-    && docker-php-ext-enable redis swoole grpc protobuf yaml \
+    && pecl install redis grpc protobuf yaml \
+    && docker-php-ext-enable redis grpc protobuf yaml \
+    && mkdir -p /build \
+    && cd /build \
+    && git clone -b v4.4.17 https://github.com/swoole/swoole-src.git \
+    && cd swoole-src \
+    && phpize \
+    && ./configure --with-php-config=/usr/local/bin/php-config --enable-openssl --enable-http2 \
+    && make && make install \
+    && cd && rm -rf /build \
     && apk del .build-deps
 
-RUN echo "swoole.use_shortname='Off'" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini
+RUN tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini <<- 'EOF' \
+    extension=swoole \
+    swoole.use_shortname='Off' \
+    EOF
 
 VOLUME [ "/app" ]
 
