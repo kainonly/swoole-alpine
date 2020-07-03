@@ -12,7 +12,6 @@ RUN apk add --no-cache \
     libzip \
     libxml2 \
     gmp \
-    enchant \
     zlib \
     openssl \
     yaml
@@ -34,13 +33,11 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     libzip-dev \
     libxml2-dev \
     gmp-dev \
-    enchant-dev \
     openssl-dev \
     yaml-dev \
     \
     && docker-php-ext-install \
     \
-    ffi \
     calendar \
     bz2 \
     zip \
@@ -49,7 +46,6 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     exif \
     gmp \
     bcmath \
-    enchant \
     sockets \
     mysqli \
     pdo_mysql \
