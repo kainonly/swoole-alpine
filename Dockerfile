@@ -1,4 +1,4 @@
-FROM php:7.4.9-alpine
+FROM php:7.4.10-alpine
 
 WORKDIR /app
 
@@ -58,7 +58,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-enable redis grpc protobuf yaml \
     && mkdir -p /build \
     && cd /build \
-    && git clone -b v4.5.2 https://github.com/swoole/swoole-src.git \
+    && git clone -b v4.5.4 https://github.com/swoole/swoole-src.git \
     && cd swoole-src \
     && phpize \
     && ./configure --with-php-config=/usr/local/bin/php-config --enable-openssl --enable-http2 \
