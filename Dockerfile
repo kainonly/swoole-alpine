@@ -1,4 +1,6 @@
-FROM php:7.4.11-alpine
+FROM php:7.4.12-alpine
+
+ENV SWOOLE_VERSION 4.5.9
 
 WORKDIR /app
 
@@ -51,17 +53,22 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     pdo_mysql \
     opcache \
     \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \ 
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     \
     && pecl install redis grpc protobuf yaml \
     && docker-php-ext-enable redis grpc protobuf yaml \
     && mkdir -p /build \
     && cd /build \
-    && git clone -b v4.5.4 https://github.com/swoole/swoole-src.git \
+    && git clone -b v${SWOOLE_VERSION} https://github.com/swoole/swoole-src.git \
     && cd swoole-src \
     && phpize \
-    && ./configure --with-php-config=/usr/local/bin/php-config --enable-openssl --enable-http2 \
+    && ./configure --with-php-config=/usr/local/bin/php-config \
+    --enable-sockets \
+    --enable-openssl \
+    --enable-http2 \
+    --enable-mysqlnd \
+    --enable-swoole-json \
     && make && make install \
     && cd && rm -rf /build \
     && apk del .build-deps
