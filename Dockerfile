@@ -1,6 +1,6 @@
-FROM php:7.4.12-alpine
+FROM php:7.4.14-alpine
 
-ENV SWOOLE_VERSION 4.5.9
+ENV SWOOLE_VERSION 4.6.0
 
 WORKDIR /app
 
