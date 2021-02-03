@@ -67,7 +67,6 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     --enable-openssl \
     --enable-http2 \
     --enable-swoole-json \
-    --enable-swoole-curl \
     && make && make install \
     && cd && rm -rf /build \
     && apk del .build-deps
